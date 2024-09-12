@@ -1,21 +1,34 @@
 #include <Arduino.h>
+#include <AccelStepper.h>
 
-// Definir el pin del LED
-const int ledPin = 2;
+// Definir los pines para el driver A4988
+#define PIN_STEP 26
+#define PIN_DIR  25
+
+
+// Crear una instancia de AccelStepper
+AccelStepper stepper(AccelStepper::DRIVER, PIN_STEP, PIN_DIR);
 
 void setup() {
-  // Configurar el pin del LED como salida
-  pinMode(ledPin, OUTPUT);
+  // Configuración de velocidad y aceleración
+  stepper.setMaxSpeed(1000);    // Máxima velocidad en pasos por segundo
+  stepper.setAcceleration(500); // Aceleración en pasos por segundo^2
 }
 
 void loop() {
-  // Encender el LED
-  digitalWrite(ledPin, HIGH);
-  // Esperar 1000 milisegundos (1 segundo)
-  delay(1000);
-  
-  // Apagar el LED
-  digitalWrite(ledPin, LOW);
-  // Esperar 1000 milisegundos (1 segundo)
-  delay(1000);
+  // Mover el motor hacia adelante
+  stepper.moveTo(2000); // Mover 2000 pasos hacia adelante
+  while (stepper.distanceToGo() != 0) {
+    stepper.run(); // Esta función debe llamarse repetidamente
+  }
+
+  delay(1000); // Esperar un segundo
+
+  // Mover el motor hacia atrás
+  stepper.moveTo(0); // Mover de regreso a la posición 0
+  while (stepper.distanceToGo() != 0) {
+    stepper.run(); // Esta función debe llamarse repetidamente
+  }
+
+  delay(1000); // Esperar un segundo
 }
