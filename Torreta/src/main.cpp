@@ -26,8 +26,8 @@ void setup() {
 void loop() {
   // Rutina del faro de vigilancia simulando diferentes posiciones
   // Paso 1: Mover a posición (derecha, arriba)
-  stepper1.moveTo(3000);  // Derecha en eje horizontal
-  stepper2.moveTo(1500);  // Arriba en eje vertical
+  stepper1.moveTo(200);  // Derecha en eje horizontal
+  stepper2.moveTo(100);  // Arriba en eje vertical
   
   while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
     stepper1.run();
@@ -36,8 +36,8 @@ void loop() {
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 2: Mover a posición (izquierda, abajo)
-  stepper1.moveTo(-3000);  // Izquierda en eje horizontal
-  stepper2.moveTo(-1500);  // Abajo en eje vertical
+  stepper1.moveTo(0);  // Izquierda en eje horizontal
+  stepper2.moveTo(0);  // Abajo en eje vertical
   
   while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
     stepper1.run();
@@ -46,8 +46,8 @@ void loop() {
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 3: Mover a posición (centro, arriba)
-  stepper1.moveTo(0);    // Centro en eje horizontal
-  stepper2.moveTo(1500); // Arriba en eje vertical
+  stepper1.moveTo(-200);    // Centro en eje horizontal
+  stepper2.moveTo(-100); // Arriba en eje vertical
   
   while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
     stepper1.run();
@@ -56,8 +56,8 @@ void loop() {
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 4: Mover a posición (derecha, abajo)
-  stepper1.moveTo(3000);  // Derecha en eje horizontal
-  stepper2.moveTo(-1500); // Abajo en eje vertical
+  stepper1.moveTo(-200);  // Derecha en eje horizontal
+  stepper2.moveTo(100); // Abajo en eje vertical
   
   while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
     stepper1.run();
@@ -66,8 +66,8 @@ void loop() {
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 5: Mover a posición (izquierda, arriba)
-  stepper1.moveTo(-3000); // Izquierda en eje horizontal
-  stepper2.moveTo(1500);  // Arriba en eje vertical
+  stepper1.moveTo(0); // Izquierda en eje horizontal
+  stepper2.moveTo(0);  // Arriba en eje vertical
   
   while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
     stepper1.run();
