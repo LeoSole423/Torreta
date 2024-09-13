@@ -6,8 +6,8 @@
 #define PIN_DIR_1  25
 
 // Definir los pines para el segundo driver A4988 (Motor 2)
-#define PIN_STEP_2 35
-#define PIN_DIR_2  34
+#define PIN_STEP_2 12
+#define PIN_DIR_2  14
 
 // Crear instancias de AccelStepper para cada motor
 AccelStepper stepper1(AccelStepper::DRIVER, PIN_STEP_1, PIN_DIR_1);
