@@ -2,76 +2,77 @@
 #include <Arduino.h>
 #include <AccelStepper.h>
 
-// Definir los pines para el primer driver A4988 (Eje horizontal - Izquierda/Derecha)
-#define PIN_STEP_1 26
-#define PIN_DIR_1  25
+// Definir los pines para los drivers A4988
+// Motor 1 (eje X)
+#define PIN_STEP1 26
+#define PIN_DIR1  25
 
-// Definir los pines para el segundo driver A4988 (Eje vertical - Arriba/Abajo)
-#define PIN_STEP_2 24
-#define PIN_DIR_2  23
+// Motor 2 (eje Y)
+#define PIN_STEP2 12
+#define PIN_DIR2  14
 
 // Crear instancias de AccelStepper para cada motor
-AccelStepper stepper1(AccelStepper::DRIVER, PIN_STEP_1, PIN_DIR_1); // Horizontal
-AccelStepper stepper2(AccelStepper::DRIVER, PIN_STEP_2, PIN_DIR_2); // Vertical
+AccelStepper StepperY(AccelStepper::DRIVER, PIN_STEP1, PIN_DIR1); // Horizontal
+AccelStepper StepperX(AccelStepper::DRIVER, PIN_STEP2, PIN_DIR2); // Vertical
 
 void setup() {
   // Configuración de velocidad y aceleración para ambos motores
-  stepper1.setMaxSpeed(800);    // Máxima velocidad en pasos por segundo (Motor 1 - Horizontal)
-  stepper1.setAcceleration(400); // Aceleración en pasos por segundo^2 (Motor 1)
+  StepperY.setMaxSpeed(800);    // Máxima velocidad en pasos por segundo (Motor 1 - Horizontal)
+  StepperY.setAcceleration(400); // Aceleración en pasos por segundo^2 (Motor 1)
   
-  stepper2.setMaxSpeed(600);    // Máxima velocidad en pasos por segundo (Motor 2 - Vertical)
-  stepper2.setAcceleration(300); // Aceleración en pasos por segundo^2 (Motor 2)
+  StepperX.setMaxSpeed(600);    // Máxima velocidad en pasos por segundo (Motor 2 - Vertical)
+  StepperX.setAcceleration(300); // Aceleración en pasos por segundo^2 (Motor 2)
 }
 
 void loop() {
   // Rutina del faro de vigilancia simulando diferentes posiciones
   // Paso 1: Mover a posición (derecha, arriba)
-  stepper1.moveTo(200);  // Derecha en eje horizontal
-  stepper2.moveTo(100);  // Arriba en eje vertical
+  StepperY.moveTo(200);  // Derecha en eje horizontal
+  StepperX.moveTo(100);  // Arriba en eje vertical
   
-  while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
-    stepper1.run();
-    stepper2.run();
+  while (StepperY.distanceToGo() != 0 || StepperX.distanceToGo() != 0) {
+    StepperY.run();
+    StepperX.run();
   }
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 2: Mover a posición (izquierda, abajo)
-  stepper1.moveTo(0);  // Izquierda en eje horizontal
-  stepper2.moveTo(0);  // Abajo en eje vertical
+  StepperY.moveTo(0);  // Izquierda en eje horizontal
+  StepperX.moveTo(0);  // Abajo en eje vertical
   
-  while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
-    stepper1.run();
-    stepper2.run();
+  while (StepperY.distanceToGo() != 0 || StepperX.distanceToGo() != 0) {
+    StepperY.run();
+    StepperX.run();
   }
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 3: Mover a posición (centro, arriba)
-  stepper1.moveTo(-200);    // Centro en eje horizontal
-  stepper2.moveTo(-100); // Arriba en eje vertical
+  StepperY.moveTo(-200);    // Centro en eje horizontal
+  StepperX.moveTo(-100); // Arriba en eje vertical
   
-  while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
-    stepper1.run();
-    stepper2.run();
+  while (StepperY.distanceToGo() != 0 || StepperX.distanceToGo() != 0) {
+    StepperY.run();
+    StepperX.run();
   }
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 4: Mover a posición (derecha, abajo)
-  stepper1.moveTo(-200);  // Derecha en eje horizontal
-  stepper2.moveTo(100); // Abajo en eje vertical
+  StepperY.moveTo(-200);  // Derecha en eje horizontal
+  StepperX.moveTo(100); // Abajo en eje vertical
   
-  while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
-    stepper1.run();
-    stepper2.run();
+  while (StepperY.distanceToGo() != 0 || StepperX.distanceToGo() != 0) {
+    StepperY.run();
+    StepperX.run();
   }
   delay(500); // Pausa en esa posición para alumbrar
 
   // Paso 5: Mover a posición (izquierda, arriba)
-  stepper1.moveTo(0); // Izquierda en eje horizontal
-  stepper2.moveTo(0);  // Arriba en eje vertical
+  StepperY.moveTo(0); // Izquierda en eje horizontal
+  StepperX.moveTo(0);  // Arriba en eje vertical
   
-  while (stepper1.distanceToGo() != 0 || stepper2.distanceToGo() != 0) {
-    stepper1.run();
-    stepper2.run();
+  while (StepperY.distanceToGo() != 0 || StepperX.distanceToGo() != 0) {
+    StepperY.run();
+    StepperX.run();
   }
   delay(500); // Pausa en esa posición para alumbrar
 
