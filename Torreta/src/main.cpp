@@ -7,8 +7,8 @@
 #define PIN_DIR1  25
 
 // Motor 2 (eje Y)
-#define PIN_STEP2 34
-#define PIN_DIR2  35
+#define PIN_STEP2 12
+#define PIN_DIR2  14
 
 // Crear instancias de AccelStepper para cada motor
 AccelStepper motor1(AccelStepper::DRIVER, PIN_STEP1, PIN_DIR1);
