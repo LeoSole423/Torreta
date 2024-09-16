@@ -12,6 +12,8 @@
 #define PIN_STEP2 12
 #define PIN_DIR2  14
 
+#define MOVE_STEPS 10
+
 // Crear instancias de AccelStepper para cada motor
 AccelStepper motor1(AccelStepper::DRIVER, PIN_STEP1, PIN_DIR1);
 AccelStepper motor2(AccelStepper::DRIVER, PIN_STEP2, PIN_DIR2);
@@ -97,25 +99,25 @@ void handleRoot() {
 // Funciones para manejar las peticiones del servidor y mover los motores
 void handleUp() {
   Serial.println("Moviendo Arriba");
-  moverMotores(0, 50);  // Mueve el motor en el eje Y hacia arriba
+  moverMotores(0, MOVE_STEPS);  // Mueve el motor en el eje Y hacia arriba
   server.send(204, "text/plain", "");  // Respuesta sin contenido
 }
 
 void handleDown() {
   Serial.println("Moviendo Abajo");
-  moverMotores(0, -50); // Mueve el motor en el eje Y hacia abajo
+  moverMotores(0, -MOVE_STEPS); // Mueve el motor en el eje Y hacia abajo
   server.send(204, "text/plain", "");  // Respuesta sin contenido
 }
 
 void handleLeft() {
   Serial.println("Moviendo Izquierda");
-  moverMotores(-50, 0); // Mueve el motor en el eje X hacia la izquierda
+  moverMotores(-MOVE_STEPS, 0); // Mueve el motor en el eje X hacia la izquierda
   server.send(204, "text/plain", "");  // Respuesta sin contenido
 }
 
 void handleRight() {
   Serial.println("Moviendo Derecha");
-  moverMotores(50, 0);  // Mueve el motor en el eje X hacia la derecha
+  moverMotores(MOVE_STEPS, 0);  // Mueve el motor en el eje X hacia la derecha
   server.send(204, "text/plain", "");  // Respuesta sin contenido
 }
 
