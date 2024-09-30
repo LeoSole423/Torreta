@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <Arduino.h>
 #include <AccelStepper.h>
 
 // Definir los pines para los drivers A4988
@@ -11,9 +10,16 @@
 #define PIN_STEP2 12
 #define PIN_DIR2  14
 
+// Definir el pin 32
+#define PIN_32 32
+
 // Crear instancias de AccelStepper para cada motor
 AccelStepper StepperY(AccelStepper::DRIVER, PIN_STEP1, PIN_DIR1); // Horizontal
 AccelStepper StepperX(AccelStepper::DRIVER, PIN_STEP2, PIN_DIR2); // Vertical
+
+// Variables para el temporizador del pin 32
+unsigned long previousMillis = 0;
+const long interval = 5000; // 5 segundos
 
 void setup() {
   // Configuración de velocidad y aceleración para ambos motores
@@ -22,6 +28,10 @@ void setup() {
   
   StepperX.setMaxSpeed(600);    // Máxima velocidad en pasos por segundo (Motor 2 - Vertical)
   StepperX.setAcceleration(300); // Aceleración en pasos por segundo^2 (Motor 2)
+
+  // Configurar pin 32 como salida y activar el pull-up
+  pinMode(PIN_32, OUTPUT);
+  digitalWrite(PIN_32, HIGH); // Estado por defecto: alto (pull-up)
 }
 
 void loop() {
@@ -77,4 +87,16 @@ void loop() {
   delay(500); // Pausa en esa posición para alumbrar
 
   // Repetir el ciclo de posiciones
+
+  // Control del pin 32: flanco de bajada a masa cada 5 segundos
+  unsigned long currentMillis = millis();
+  
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    
+    // Hacer un flanco de bajada (LOW) por un breve instante
+    digitalWrite(PIN_32, LOW);
+    delay(50); // Mantenerlo en bajo por 50ms
+    digitalWrite(PIN_32, HIGH); // Regresar a estado alto
+  }
 }
